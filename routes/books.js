@@ -35,7 +35,7 @@ router.post("/", (req, res) => {
     .then((book) => {
       res.status(200).json(book);
     })
-    .error((err) => {
+    .catch((err) => {
       res.status(405).json("Error has occured");
     });
 });

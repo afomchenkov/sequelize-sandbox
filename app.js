@@ -1,12 +1,12 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const sqlite = require("sqlite3");
-const env = require("dotenv").load();
-const port = process.env.PORT || 8080;
-
+// const sqlite = require("sqlite3");
+// const env = require("dotenv");
 const models = require("./models");
 const books = require("./routes/books");
+
+const port = process.env.PORT || 8080;
 
 models.sequelize
   .sync()
@@ -28,7 +28,7 @@ app.use("/books", books);
 
 app.get("/", function (req, res) {
   console.log("app listening on port: " + port);
-  res.send("tes express nodejs sqlite");
+  res.send("test express nodejs sqlite");
 });
 
 app.listen(port, function () {
