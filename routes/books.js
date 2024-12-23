@@ -2,6 +2,19 @@ const express = require("express");
 const Book = require("../models").Book;
 const router = express.Router();
 
+const random = (length) => {
+  let result = '';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const charactersLength = characters.length;
+  let counter = 0;
+  while (counter < length) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    counter += 1;
+  }
+  return result;
+}
+
+
 const checkIDInput = (req, res, next) => {
   if (isNaN(req.params.id)) {
     res.status(400).json("Invalid ID supplied");
@@ -31,6 +44,7 @@ router.post("/", (req, res) => {
     title: req.body.title,
     author: req.body.author,
     category: req.body.category,
+    tags: Array.from({ length: 4 }, _ => random(10)),
   })
     .then((book) => {
       res.status(200).json(book);
